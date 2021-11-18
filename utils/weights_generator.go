@@ -4,7 +4,7 @@ import "errors"
 
 func GenerateWeights(list []string, args ...float64) (map[string]float64, error) {
 	if len(list) < len(args) {
-		return nil, errors.New("weights length too long")
+		args = args[0:len(list)]
 	}
 
 	if !OverZero(args) {

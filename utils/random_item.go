@@ -3,8 +3,7 @@ package utils
 import (
 	"fmt"
 	"math/rand"
-
-	wr "github.com/mroth/weightedrand"
+	"time"
 )
 
 func GetRandomItemFromMapWithWeight(items map[string]float64) string {
@@ -13,16 +12,16 @@ func GetRandomItemFromMapWithWeight(items map[string]float64) string {
 	_factor := 1 / _minVal
 	_tmp := turn_float_to_int(items, _factor)
 
-	var choices []wr.Choice
+	var choices []Choice
 
 	for k, v := range _tmp {
-		choices = append(choices, wr.Choice{
+		choices = append(choices, Choice{
 			Item:   k,
 			Weight: v,
 		})
 
 	}
-	chooser, err := wr.NewChooser(choices...)
+	chooser, err := NewChooser(choices...)
 	if err != nil {
 		fmt.Println(err)
 		keys := GetKeys(items)
@@ -32,6 +31,7 @@ func GetRandomItemFromMapWithWeight(items map[string]float64) string {
 }
 
 func GetRandomItemFromStringList(items []string) string {
+	rand.Seed(time.Now().UnixNano())
 	index := rand.Intn(len(items))
 	return items[index]
 }

@@ -1,3 +1,5 @@
 package gofaker
 
-func GenerateRandomAddress()
+func GenerateRandomAddress() {
+
+}
