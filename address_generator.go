@@ -2,9 +2,10 @@ package gofaker
 
 import (
 	"fmt"
-	p "guchengxi1994/go_faker/providers"
-	a "guchengxi1994/go_faker/providers/address"
-	utils "guchengxi1994/go_faker/utils"
+
+	p "github.com/guchengxi1994/go_faker/providers"
+	a "github.com/guchengxi1994/go_faker/providers/address"
+	utils "github.com/guchengxi1994/go_faker/utils"
 )
 
 type BaseAddress interface {
