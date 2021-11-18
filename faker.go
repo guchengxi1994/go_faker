@@ -1,1 +1,3 @@
 package gofaker
+
+func GenerateRandomAddress()
