@@ -425,3 +425,12 @@ var Zh_city_suffixes_simple = []string{
 var Zh_street_suffixes_simple = []string{
 	"街", "路",
 }
+
+var Zh_location_map_simple = map[string][]string{
+	"Zh_provinces_simple":       Zh_provinces_simple,
+	"Zh_districts_simple":       Zh_districts_simple,
+	"Zh_cities_simple":          Zh_cities_simple,
+	"Zh_countries_simple":       Zh_countries_simple,
+	"Zh_city_suffixes_simple":   Zh_city_suffixes_simple,
+	"Zh_street_suffixes_simple": Zh_street_suffixes_simple,
+}

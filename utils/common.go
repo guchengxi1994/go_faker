@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"math/rand"
 	"sort"
 	"strconv"
 )
@@ -71,7 +70,7 @@ func GetKeys(amap map[string]float64) []string {
 func GenerateRandomNumber(length int) string {
 	var result string
 	for i := 0; i < length; i++ {
-		result += strconv.Itoa(rand.Intn(10))
+		result += strconv.Itoa(Randn(10))
 	}
 	return result
 }

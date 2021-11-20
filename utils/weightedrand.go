@@ -86,8 +86,9 @@ var (
 //
 // Utilizes global rand as the source of randomness.
 func (c Chooser) Pick() interface{} {
-	rand.Seed(time.Now().UnixNano())
-	r := rand.Intn(c.max) + 1
+	// rand.Seed(time.Now().UnixNano())
+	// r := rand.Intn(c.max) + 1
+	r := Randn(c.max) + 1
 	i := searchInts(c.totals, r)
 	return c.data[i].Item
 }
