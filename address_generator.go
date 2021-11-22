@@ -2,6 +2,9 @@ package gofaker
 
 import (
 	"fmt"
+	"math/rand"
+	"strconv"
+	"time"
 
 	p "github.com/guchengxi1994/go_faker/providers"
 	a "github.com/guchengxi1994/go_faker/providers/address"
@@ -24,6 +27,13 @@ type Address struct {
 	Args           []float64
 	UseWeighting   bool
 	Locole         string
+}
+
+type Location struct {
+	Longitude string // 经度  0-180
+	Latitude  string // 维度  0-90
+	WE        string
+	NS        string
 }
 
 func (addr *Address) BuildingNumber(length int) string {
@@ -179,4 +189,35 @@ func (addr *Address) Address(args ...float64) string {
 		result = fmt.Sprintf(p.Zh_address_format_simple, addr.Province(args...), addr.City(args...), addr.District(args...), addr.StreetAddress(addr.PostcodeLength, args...))
 	}
 	return result
+}
+
+func (location *Location) GetPositon() string {
+	randLongInt := utils.Randn(65535)
+	randLongFloat := float64(randLongInt) / 65535 * 180
+	randLatInt := utils.Randn(65535)
+	randLatFloat := float64(randLatInt) / 65535 * 90
+
+	location.Latitude = strconv.FormatFloat(randLatFloat, 'f', 5, 64)
+	location.Longitude = strconv.FormatFloat(randLongFloat, 'f', 5, 64)
+	we := func() string {
+		rand.Seed(time.Now().UnixNano())
+		if rand.Int31n(2) == 1 {
+			return "E"
+		}
+		return "W"
+	}
+
+	ns := func() string {
+		rand.Seed(time.Now().UnixNano())
+		if rand.Int31n(2) == 1 {
+			return "N"
+		}
+		return "S"
+	}
+
+	location.WE = we()
+	location.NS = ns()
+
+	return fmt.Sprintf("%s %s,%s %s", location.NS, location.Latitude, location.WE, location.Longitude)
+
 }
