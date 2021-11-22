@@ -28,7 +28,7 @@ type Address struct {
 
 func (addr *Address) BuildingNumber(length int) string {
 	var result string
-	buildCode := utils.GenerateRandomNumber(length)
+	buildCode := utils.GenerateRandomNumberNew(length)
 	switch addr.Locole {
 	case "zh_CN":
 		result = fmt.Sprintf(p.Zh_building_number_format_simple, buildCode)

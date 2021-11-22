@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"math"
 	"sort"
 	"strconv"
 )
@@ -73,4 +74,23 @@ func GenerateRandomNumber(length int) string {
 		result += strconv.Itoa(Randn(10))
 	}
 	return result
+}
+
+func GenerateRandomNumberNew(length int) string {
+	if length == 0 {
+		length = 1
+	}
+	max := math.Pow(10, float64(length))
+
+	return strconv.Itoa(Randn(int(max)))
+}
+
+func StringArrayContains(strs []string, pattern string) bool {
+	for _, v := range strs {
+		if v == pattern {
+			return true
+		}
+	}
+
+	return false
 }
