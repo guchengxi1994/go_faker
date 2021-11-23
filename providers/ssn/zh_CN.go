@@ -1,6 +1,6 @@
 package ssn
 
-var Ssn_pre = []string{
+var Ssn_pre_zh = []string{
 	"110000",
 	"110100",
 	"110101",

@@ -11,10 +11,12 @@ import (
 )
 
 type SSN struct {
-	Locale string
-	MaxAge int
-	MinAge int
-	Gender bool
+	Locale     string
+	MaxAge     int
+	MinAge     int
+	Gender     bool
+	generated  bool
+	currentAge int
 }
 
 var checkNumber = []string{
@@ -39,7 +41,7 @@ func checksum(s string) string {
 	return checkNumber[index]
 }
 
-func GenerateRandomDate(max, min int) string {
+func GenerateRandomDate(max, min int) (string, int) {
 	if max <= min {
 		max, min = min, max
 	}
@@ -53,9 +55,10 @@ func GenerateRandomDate(max, min int) string {
 	delta := maxDate - minDate
 
 	sec := int64(utils.Randn(int(delta))) + minDate
+	age := year - time.Unix(sec, 0).Year()
 	_time := strings.Split(fmt.Sprintf("%v", time.Unix(sec, 0)), " ")[0]
 
-	return strings.ReplaceAll(_time, "-", "")
+	return strings.ReplaceAll(_time, "-", ""), age
 }
 
 func (ssn *SSN) GenerateSequenceCode() string {
@@ -82,6 +85,7 @@ func (ssn *SSN) GenerateSequenceCode() string {
 }
 
 func (ssn *SSN) Generate() string {
+	ssn.generated = true
 	var result string
 
 	if ssn.MaxAge == 0 {
@@ -92,9 +96,11 @@ func (ssn *SSN) Generate() string {
 		ssn.MinAge = 18
 	}
 
-	pre := utils.GetRandomItemFromStringList(s.Ssn_pre)
+	pre := utils.GetRandomItemFromStringList(s.Ssn_pre_zh)
 
-	date := GenerateRandomDate(ssn.MaxAge, ssn.MinAge)
+	date, age := GenerateRandomDate(ssn.MaxAge, ssn.MinAge)
+
+	ssn.currentAge = age
 
 	scode := ssn.GenerateSequenceCode()
 

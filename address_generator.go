@@ -24,7 +24,7 @@ type BaseAddress interface {
 
 type Address struct {
 	PostcodeLength int
-	Args           []float64
+	Args           []float64 // weight
 	UseWeighting   bool
 	Locole         string
 }
@@ -174,6 +174,7 @@ func (addr *Address) Province(args ...float64) string {
 	return result
 }
 
+// generate
 func (addr *Address) Address(args ...float64) string {
 	if len(args) == 0 && addr.Args != nil {
 		args = addr.Args

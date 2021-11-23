@@ -12,5 +12,7 @@ package gofaker
 	v0.0.2+2 mobile(zh_CN) generator
 
 	v0.0.2+3 ssn(zh_CN) generator
+
+	v0.0.3 profile generator
 */
-var Version = "0.0.2+3"
+var Version = "0.0.3"
