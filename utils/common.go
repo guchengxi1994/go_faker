@@ -82,7 +82,13 @@ func GenerateRandomNumberNew(length int) string {
 	}
 	max := math.Pow(10, float64(length))
 
-	return strconv.Itoa(Randn(int(max)))
+	s := strconv.Itoa(Randn(int(max)))
+
+	if len(s) < length {
+		return multiple("0", length-len(s)) + s
+	}
+
+	return s
 }
 
 func StringArrayContains(strs []string, pattern string) bool {
@@ -93,4 +99,12 @@ func StringArrayContains(strs []string, pattern string) bool {
 	}
 
 	return false
+}
+
+func multiple(s string, times int) string {
+	var result string
+	for i := 0; i < times; i++ {
+		result += s
+	}
+	return result
 }
