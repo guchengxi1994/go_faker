@@ -19,11 +19,20 @@ type Profile struct {
 	WorkExperiences []Experience `json:"workExperiences"`
 	Description     string       `json:"description"`
 	generated       bool
+	Age             int `json:"age"`
 }
 
 func (p *Profile) Generate() {
 	p.generated = true
-	p.Name = "张三" // for  test
+
+	pname := PersonName{
+		Locale: p.Locale,
+		Gender: p.Gender,
+	}
+
+	pname.Generate()
+
+	p.Name = pname.ToString(true)
 	rand.Seed(time.Now().UnixNano())
 	p.Gender = rand.Int31n(2) == 1
 	ssn := SSN{
@@ -43,7 +52,10 @@ func (p *Profile) Generate() {
 	}
 	p.HomeAddress = homeAddress.Address()
 
+	p.Age = ssn.currentAge
+
 	workAge := determineWorkAge(ssn.currentAge)
+
 	var workTimes int
 
 	workTimes = workAge / 2
@@ -52,7 +64,7 @@ func (p *Profile) Generate() {
 		workTimes = 10
 	}
 
-	p.WorkExperiences = GenerateWorkExperiences(workTimes, workAge, p.Locale)
+	p.WorkExperiences = GenerateWorkExperiences(workTimes, p.Age-workAge, p.Locale)
 
 	p.Description = utils.GetRandomItemFromStringList(data.ExperienceDescriptionZh)
 
@@ -71,6 +83,7 @@ func (p *Profile) ToString() string {
 			`
 			姓名：%s,
 			性别：%s,
+			年龄：%v,
 			手机号码：%s,
 			身份证号码：%s,
 			家庭住址：%s,
@@ -85,11 +98,12 @@ func (p *Profile) ToString() string {
 			}
 		}()
 		_ex := p.FormatExperice()
-		return fmt.Sprintf(result, p.Name, _gender, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex, p.Description)
+		return fmt.Sprintf(result, p.Name, _gender, p.Age, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex, p.Description)
 	default:
 		result = `
 			姓名：%s,
 			性别：%s,
+			年龄：%v,
 			手机号码：%s,
 			身份证号码：%s,
 			家庭住址：%s,
@@ -104,7 +118,7 @@ func (p *Profile) ToString() string {
 			}
 		}()
 		_ex := p.FormatExperice()
-		return fmt.Sprintf(result, p.Name, _gender, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex, p.Description)
+		return fmt.Sprintf(result, p.Name, _gender, p.Age, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex, p.Description)
 	}
 }
 
@@ -119,7 +133,7 @@ func (p *Profile) FormatExperice() string {
 
 func determineWorkAge(currentAge int) int {
 	var ages = []int{
-		16, 17, 18, 19, 20, 21, 22, 23,
+		18, 19, 20, 21, 22, 23,
 	}
 
 	if currentAge > ages[len(ages)-1] {

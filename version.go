@@ -14,5 +14,7 @@ package gofaker
 	v0.0.2+3 ssn(zh_CN) generator
 
 	v0.0.3 profile generator
+
+	v0.0.3+1 name generator
 */
-var Version = "0.0.3"
+var Version = "0.0.3+1"
