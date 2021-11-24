@@ -87,7 +87,7 @@ func (p *Profile) ToString() string {
 			手机号码：%s,
 			身份证号码：%s,
 			家庭住址：%s,
-			工作经历：%v,
+			工作经历：%v
 			简介：%s
 			`
 		_gender := func() string {

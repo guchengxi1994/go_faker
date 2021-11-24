@@ -17,4 +17,4 @@ package gofaker
 
 	v0.0.3+1 name generator
 */
-var Version = "0.0.3+1"
+var Version = "0.0.3+2"

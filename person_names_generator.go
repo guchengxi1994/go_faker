@@ -61,12 +61,18 @@ func (p *PersonName) ToString(withPinyin bool) string {
 	case "zh_CN":
 		if withPinyin {
 			_firstnamePinyinList := pinyin.LazyConvert(p.Firstname, nil)
-			for _, v := range _firstnamePinyinList {
+			for i, v := range _firstnamePinyinList {
+				if i == 0 {
+					v = utils.StrFirstToUpper(v)
+				}
 				_pinyin += v
 			}
 			_pinyin += " "
 			_lastnamePinyinList := pinyin.LazyConvert(p.Lastname, nil)
-			for _, v := range _lastnamePinyinList {
+			for i, v := range _lastnamePinyinList {
+				if i == 0 {
+					v = utils.StrFirstToUpper(v)
+				}
 				_pinyin += v
 			}
 			return p.Lastname + p.Firstname + _pinyin
