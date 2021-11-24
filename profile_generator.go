@@ -10,17 +10,17 @@ import (
 )
 
 type Profile struct {
-	Name            string `json:"name"`
-	Gender          bool   `json:"gender"`
-	IdNumber        string `json:"idNumber"`
-	MobileNumber    string `json:"mobile"`
-	Locale          string
-	HomeAddress     string       `json:"homeAddress"`
-	WorkExperiences []Experience `json:"workExperiences"`
-	Description     string       `json:"description"`
-	generated       bool
-	Age             int    `json:"age"`
-	Education       string `json:"education"` // 至少初中毕业，高中毕业，大学毕业，硕士，博士，大专
+	Name                 string `json:"name"`
+	Gender               bool   `json:"gender"`
+	IdNumber             string `json:"idNumber"`
+	MobileNumber         string `json:"mobile"`
+	Locale               string
+	HomeAddress          string       `json:"homeAddress"`
+	WorkExperiences      []Experience `json:"workExperiences"`
+	Description          string       `json:"description"`
+	generated            bool
+	Age                  int          `json:"age"`
+	EducationExperiences []Experience `json:"educationExperiences"` // 至少初中毕业，高中毕业，大学毕业，硕士，博士，大专
 }
 
 func (p *Profile) Generate() {
@@ -55,18 +55,19 @@ func (p *Profile) Generate() {
 
 	p.Age = ssn.currentAge
 
-	workAge := determineWorkAge(ssn.currentAge)
+	grades := utils.GetRandomItemFromIntList([]int{2, 3, 4, 5, 6, 7})
 
-	var workTimes int
+	eduExperience, rest := GenerateSchoolExperience(grades, p.Age, p.Locale)
+	p.EducationExperiences = eduExperience
 
-	workTimes = workAge / 2
-
-	if workTimes > 10 {
-		workTimes = 10
+	if rest > 0 {
+		var workTimes int
+		workTimes = rest / 2
+		if workTimes > 10 {
+			workTimes = 10
+		}
+		p.WorkExperiences = GenerateWorkExperiences(workTimes, rest, p.Locale)
 	}
-
-	p.WorkExperiences = GenerateWorkExperiences(workTimes, p.Age-workAge, p.Locale)
-
 	p.Description = utils.GetRandomItemFromStringList(data.ExperienceDescriptionZh)
 
 }
@@ -82,12 +83,13 @@ func (p *Profile) ToString() string {
 	case "zh_CN":
 		result =
 			`
-			姓名：%s,
-			性别：%s,
-			年龄：%v,
-			手机号码：%s,
-			身份证号码：%s,
-			家庭住址：%s,
+			姓名：%s
+			性别：%s
+			年龄：%v
+			手机号码：%s
+			身份证号码：%s
+			家庭住址：%s
+			学习经历：%v
 			工作经历：%v
 			简介：%s
 			`
@@ -98,16 +100,18 @@ func (p *Profile) ToString() string {
 				return "女"
 			}
 		}()
-		_ex := p.FormatExperice()
-		return fmt.Sprintf(result, p.Name, _gender, p.Age, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex, p.Description)
+		_ex_1 := p.FormatExperice(1)
+		_ex_2 := p.FormatExperice(0)
+		return fmt.Sprintf(result, p.Name, _gender, p.Age, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex_1, _ex_2, p.Description)
 	default:
 		result = `
-			姓名：%s,
-			性别：%s,
-			年龄：%v,
-			手机号码：%s,
-			身份证号码：%s,
-			家庭住址：%s,
+			姓名：%s
+			性别：%s
+			年龄：%v
+			手机号码：%s
+			身份证号码：%s
+			家庭住址：%s
+			学习经历：%v
 			工作经历：%v
 			简介：%s
 		`
@@ -118,18 +122,35 @@ func (p *Profile) ToString() string {
 				return "女"
 			}
 		}()
-		_ex := p.FormatExperice()
-		return fmt.Sprintf(result, p.Name, _gender, p.Age, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex, p.Description)
+		_ex_1 := p.FormatExperice(1)
+		_ex_2 := p.FormatExperice(0)
+		return fmt.Sprintf(result, p.Name, _gender, p.Age, p.MobileNumber, p.IdNumber, p.HomeAddress, _ex_1, _ex_2, p.Description)
 	}
 }
 
-func (p *Profile) FormatExperice() string {
+func (p *Profile) FormatExperice(t int) string {
 	var result string
-	for _, v := range p.WorkExperiences {
-		result += v.ToString() + "\n                                  "
+	if t == 0 {
+		if len(p.WorkExperiences) == 0 {
+			return "--"
+		}
+
+		for _, v := range p.WorkExperiences {
+			result += v.ToString() + "\n                                  "
+		}
+
+		return result
+	} else {
+		if len(p.EducationExperiences) == 0 {
+			return "--"
+		}
+		for _, v := range p.EducationExperiences {
+			result += v.ToString() + "\n                                  "
+		}
+
+		return result
 	}
 
-	return result
 }
 
 func determineWorkAge(currentAge int) int {

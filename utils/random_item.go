@@ -2,6 +2,8 @@ package utils
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 func GetRandomItemFromMapWithWeight(items map[string]float64) string {
@@ -36,7 +38,8 @@ func GetRandomItemFromStringList(items []string) string {
 }
 
 func GetRandomItemFromIntList(items []int) int {
-	index := Randn(len(items))
+	rand.Seed(time.Now().UnixNano())
+	index := rand.Intn(len(items))
 	return items[index]
 }
 
