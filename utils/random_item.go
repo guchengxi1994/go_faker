@@ -35,6 +35,11 @@ func GetRandomItemFromStringList(items []string) string {
 	return items[index]
 }
 
+func GetRandomItemFromIntList(items []int) int {
+	index := Randn(len(items))
+	return items[index]
+}
+
 func turn_float_to_int(items map[string]float64, factor float64) map[string]uint {
 	result := make(map[string]uint)
 	for k, v := range items {

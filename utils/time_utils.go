@@ -67,3 +67,29 @@ func SplitNumber(times, sum int) []int {
 
 	return result
 }
+
+func SplitEducationYears(years []int, currentAge int, studyAge int) []TimeStruct {
+	var _age int = studyAge
+	var ts []TimeStruct
+	birthYear := time.Now().Year() - currentAge
+
+	for i, _v := range years {
+		var t TimeStruct
+		if i == 0 {
+			t.From = strconv.Itoa(birthYear+studyAge) + "-9"
+		} else {
+			t.From = strconv.Itoa(_age+birthYear) + "-9"
+		}
+		_age += _v
+		if _age < currentAge {
+			t.To = strconv.Itoa(_age+birthYear) + "-7"
+			ts = append(ts, t)
+		} else {
+			t.To = "now"
+			ts = append(ts, t)
+			break
+		}
+	}
+	return ts
+
+}

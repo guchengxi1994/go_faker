@@ -16,5 +16,9 @@ package gofaker
 	v0.0.3 profile generator
 
 	v0.0.3+1 name generator
+
+	v0.0.4  education generator
+
+	v0.0.5 add education to profile
 */
-var Version = "0.0.3+2"
+var Version = "0.0.5"

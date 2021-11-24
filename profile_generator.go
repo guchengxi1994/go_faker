@@ -19,7 +19,8 @@ type Profile struct {
 	WorkExperiences []Experience `json:"workExperiences"`
 	Description     string       `json:"description"`
 	generated       bool
-	Age             int `json:"age"`
+	Age             int    `json:"age"`
+	Education       string `json:"education"` // 至少初中毕业，高中毕业，大学毕业，硕士，博士，大专
 }
 
 func (p *Profile) Generate() {
