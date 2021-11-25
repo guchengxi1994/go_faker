@@ -11,16 +11,16 @@ import (
 	utils "github.com/guchengxi1994/go_faker/utils"
 )
 
-type BaseAddress interface {
-	City(args ...float64) string
-	BuildingNumber(int) string
-	District(args ...float64) string
-	Postcode(int) string
-	StreetName(args ...float64) string
-	StreetAddress(args ...float64) string
-	Country() string
-	Province(args ...float64) string
-}
+// type BaseAddress interface {
+// 	City(args ...float64) string
+// 	BuildingNumber(int) string
+// 	District(args ...float64) string
+// 	Postcode(int) string
+// 	StreetName(args ...float64) string
+// 	StreetAddress(args ...float64) string
+// 	Country() string
+// 	Province(args ...float64) string
+// }
 
 type Address struct {
 	PostcodeLength int

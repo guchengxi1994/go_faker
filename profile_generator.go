@@ -2,8 +2,6 @@ package gofaker
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 
 	"github.com/guchengxi1994/go_faker/data"
 	"github.com/guchengxi1994/go_faker/utils"
@@ -23,34 +21,63 @@ type Profile struct {
 	EducationExperiences []Experience `json:"educationExperiences"` // 至少初中毕业，高中毕业，大学毕业，硕士，博士，大专
 }
 
-func (p *Profile) Generate() {
+func (p *Profile) Generate(generators *Generators) {
 	p.generated = true
 
-	pname := PersonName{
-		Locale: p.Locale,
-		Gender: p.Gender,
+	var pname PersonName
+
+	if generators != nil && generators.Gpname != nil {
+		pname = *generators.Gpname
+		p.Gender = generators.Gpname.Gender
+	} else {
+		pname = PersonName{
+			Locale: p.Locale,
+			Gender: p.Gender,
+		}
 	}
 
 	pname.Generate()
 
 	p.Name = pname.ToString(true)
-	rand.Seed(time.Now().UnixNano())
-	p.Gender = rand.Int31n(2) == 1
-	ssn := SSN{
-		Locale: p.Locale,
-		MaxAge: 65,
-		MinAge: 20,
-		Gender: p.Gender,
+
+	var ssn SSN
+
+	if generators != nil && generators.Gssn != nil {
+		ssn = *generators.Gssn
+	} else {
+		ssn = SSN{
+			Locale: p.Locale,
+			MaxAge: 65,
+			MinAge: 20,
+			Gender: p.Gender,
+		}
 	}
+
 	p.IdNumber = ssn.Generate()
-	mobile := Mobile{
-		Locale: p.Locale,
+
+	var mobile Mobile
+
+	if generators != nil && generators.Gmobile != nil {
+		mobile = *generators.Gmobile
+	} else {
+		mobile = Mobile{
+			Locale: p.Locale,
+		}
 	}
+
 	p.MobileNumber = mobile.Generate("")
-	homeAddress := Address{
-		Locole:       p.Locale,
-		UseWeighting: false,
+
+	var homeAddress Address
+
+	if generators != nil && generators.Gaddress != nil {
+		homeAddress = *generators.Gaddress
+	} else {
+		homeAddress = Address{
+			Locole:       p.Locale,
+			UseWeighting: false,
+		}
 	}
+
 	p.HomeAddress = homeAddress.Address()
 
 	p.Age = ssn.currentAge
@@ -72,11 +99,11 @@ func (p *Profile) Generate() {
 
 }
 
-func (p *Profile) ToString() string {
+func (p Profile) ToString() string {
 	var result string
 
 	if !p.generated {
-		p.Generate()
+		p.Generate(nil)
 	}
 
 	switch p.Locale {

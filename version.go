@@ -24,5 +24,7 @@ package gofaker
 	v0.0.5+1 update utils/Randn function
 
 	v0.0.6 add nickname and lorem(for fun) generators
+
+	v0.1.0 Faker
 */
-var Version = "0.0.6"
+var Version = "0.1.0"
