@@ -119,3 +119,13 @@ func StrFirstToUpper(str string) string {
 	}
 	return string(strArry)
 }
+
+func StringEndsWith(str string, patterns []rune) bool {
+	var r = []rune(str)
+	for _, v := range patterns {
+		if v == r[len(r)-1] {
+			return true
+		}
+	}
+	return false
+}

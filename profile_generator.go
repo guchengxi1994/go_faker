@@ -153,6 +153,7 @@ func (p *Profile) FormatExperice(t int) string {
 
 }
 
+// Deprecated
 func determineWorkAge(currentAge int) int {
 	var ages = []int{
 		18, 19, 20, 21, 22, 23,

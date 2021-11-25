@@ -20,5 +20,9 @@ package gofaker
 	v0.0.4  education generator
 
 	v0.0.5 add education to profile
+
+	v0.0.5+1 update utils/Randn function
+
+	v0.0.6 add nickname and lorem(for fun) generators
 */
-var Version = "0.0.5"
+var Version = "0.0.6"

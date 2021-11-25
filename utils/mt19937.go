@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"math/rand"
 	"time"
 )
 
@@ -73,17 +72,5 @@ func Randn(max int) int {
 	if max <= 1 {
 		return 0
 	}
-
-	if max == 2 {
-		rand.Seed(time.Now().UnixNano())
-		return rand.Intn(2)
-	}
-	// 2^N
-	if max&(max-1) == 0 {
-		max = max - 1
-		rand.Seed(time.Now().UnixNano())
-		return Randn(max-1) + rand.Intn(2)
-	}
-
-	return Rand() & (max - 1)
+	return Rand() % max
 }
