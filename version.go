@@ -26,5 +26,9 @@ package gofaker
 	v0.0.6 add nickname and lorem(for fun) generators
 
 	v0.1.0 Faker
+
+	v0.1.1 car license generator
+
+	v0.1.2 isbn generator
 */
-var Version = "0.1.0"
+var Version = "0.1.1"

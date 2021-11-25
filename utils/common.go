@@ -83,7 +83,6 @@ func GenerateRandomNumberNew(length int) string {
 	max := math.Pow(10, float64(length))
 
 	s := strconv.Itoa(Randn(int(max)))
-
 	if len(s) < length {
 		return multiple("0", length-len(s)) + s
 	}
@@ -128,4 +127,12 @@ func StringEndsWith(str string, patterns []rune) bool {
 		}
 	}
 	return false
+}
+
+func GenerateRandomStrFromList(length int, list []string) string {
+	var result string
+	for i := 0; i < length; i++ {
+		result += GetRandomItemFromStringList(list)
+	}
+	return result
 }
