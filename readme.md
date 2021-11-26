@@ -1,12 +1,41 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: xiaoshuyui
+ * @email: guchengxi1994@qq.com
+ * @Date: 2021-11-26 19:57:46
+ * @LastEditors: xiaoshuyui
+ * @LastEditTime: 2021-11-26 21:04:01
+-->
 # go-faker
 
 ## Inspired by [faker](https://github.com/joke2k/faker), this is a faker library in go.
 
 ## Changelog
 
-### for details, see [version.go](version.go)
+### For details, read [version.go](version.go)
 
 ## How to use
+
+### 0.what is Faker?
+
+```go
+type Faker struct {
+	Locale           string
+	Args             []float64 // weight
+	cachedGenerators map[string]interface{}
+	inited           bool
+	Gender           bool
+}
+// `Args` are a float array which stands for weights
+// when geerating, The larger the weight, the easier 
+// the corresponding value will appear
+
+// cachedGenerators are those cached generators. once
+// inited, will be used next time
+
+```
+
 
 ### 1.Generate a random profile:
 
@@ -22,6 +51,8 @@ func main() {
 		Locale: "zh_CN",
 		Gender: true,
 	}
+    // function `Profile` needs a parameter `useCache`,
+    // which will use cached generators if useCache==true
 	fmt.Printf("f.Profile(true): %v\n", f.Profile(true))
 }
 
@@ -52,3 +83,145 @@ f.Profile(true):
                         简介：我具有良好的英语水平，从大一到大三都有专门的外教授课。在大二时就已经透过国家英语四级和六级，成绩分别是523和499。在大三时，参加雅思考试并取得5。5成绩
 */
 ```
+
+### 2.Generate a random name:
+
+```go
+
+func main() {
+    f := g.Faker{
+        Locale: "zh_CN",
+        Gender: true,  //true is male and false is female
+    }
+    fmt.Printf("f.PersonName(): %v\n", f.PersonName())
+}
+```
+
+### 3.Generate a random companyname
+
+```go
+func main() {
+    f := g.Faker{
+        Locale: "zh_CN",
+    }
+    fmt.Printf("f.CompanyName(): %v\n", f.CompanyName())
+}
+```
+
+### 4.Generate a random IPv4 address(with or without port)
+
+```go
+func main() {
+	f := g.Faker{}
+	fmt.Printf("f.IpAddr(true): %v\n", f.IpAddr(true))
+}
+```
+
+### 5.Generate a random job
+
+```go
+func main() {
+	f := g.Faker{
+		Locale: "zh_CN",
+	}
+	fmt.Printf("f.Job(): %v\n", f.Job())
+}
+```
+
+### 6.Generate a random lorem
+
+```go
+func main() {
+	f := g.Faker{
+		Locale: "zh_CN",
+	}
+    // parameter uclike is just a joke
+	fmt.Printf("f.Lorem(true): %v\n", f.Lorem(true))
+}
+
+```
+
+### 7.Generate a random mobile number
+
+```go
+func main() {
+	f := g.Faker{
+		Locale: "zh_CN",
+	}
+	fmt.Printf("f.Mobile(): %v\n", f.Mobile())
+}
+```
+
+### 8.Generate a random nickname
+
+```go
+func main() {
+	f := g.Faker{
+		Gender: true,
+	}
+	fmt.Printf("f.Nickname(): %v\n", f.Nickname())
+}
+```
+
+### 9.Generate a random SSN
+
+```go
+func main() {
+	f := g.Faker{
+		Gender: true,
+		Locale: "zh_CN",
+	}
+	fmt.Printf("f.SSN(): %v\n", f.SSN())
+}
+```
+
+### 10.Generate a random school name
+
+```go
+func main() {
+	f := g.Faker{
+		Locale: "zh_CN",
+	}
+	fmt.Printf("f.School(): %v\n", f.School())
+}
+```
+
+### 11.Generate a random isbn (10 and 13)
+```go
+func main() {
+	i := g.ISBN{}
+	i.Generate()
+	fmt.Printf("i.ToString(): %v\n", i.ToString())
+}
+```
+
+### 12.Others are under construction.
+
+## Custom generators
+
+### Yes, it is supported after v0.2.1. Maybe not convient right now.
+
+```go
+// first, write a custom function
+// must  return a string
+func testFunc() string {
+	return "hahaha"
+}
+
+// write a format, read providers/formats.go for details
+runStr = `{func.testFunc}`   // format
+
+// add this function to global_functions
+provider.AddGlobalFunction("whatever a name",testFunc)
+
+// call this runStr
+fmt.Printf("provider.Format(runStr, false): %v\n", provider.Format(runStr, false))
+// then, you will get provider.Format(runStr, false): hahaha 
+
+```
+
+## Why a new repo?
+
+### I have been learning golang since Sep.2021, it is quite different from python/java/dart. It is not hard but a little not convient when coding such as find out wether an array contains a specific item, or get a substring. And the `path` module in go maybe not as good as python's `os.path` module. Also, no  `try...catch...`. I think I need more execises in golang.
+
+### And yes, building wheels with a unfamiliar language is amazing. 

@@ -155,7 +155,7 @@ func (f *Faker) IpAddr(withport bool) string {
 		f.Init()
 	}
 	if withport {
-		return GenerateIpV4Address(false) + GeneratePort(60000)
+		return GenerateIpV4Address(false) + ":" + GeneratePort(60000)
 	}
 	return GenerateIpV4Address(false)
 }
