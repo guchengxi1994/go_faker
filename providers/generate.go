@@ -1,6 +1,7 @@
 package providers
 
 import (
+	"errors"
 	"reflect"
 	"regexp"
 	"strings"
@@ -144,4 +145,24 @@ func applyFunction(functionname string, argname ...string) string {
 		}
 	}
 
+}
+
+func AddGlobalVariants(name string, value []string) error {
+	_, ok := global_variants[name]
+	if ok {
+		return errors.New("name already exists")
+	} else {
+		global_variants[name] = &value
+		return nil
+	}
+}
+
+func AddGlobalFunction(name string, value interface{}) error {
+	_, ok := global_function[name]
+	if ok {
+		return errors.New("name already exists")
+	} else {
+		global_function[name] = value
+		return nil
+	}
 }

@@ -33,5 +33,15 @@ package gofaker
 
 	v0.2.0 create a pattern to generate random
 		   information, such as python faker
+
+	v0.2.1 add 2 functions AddGlobalVariants and AddGlobalFunction
+		   which allows to use custom formats
+		   eg.
+		   func testFunc() string {
+				return "hahaha"
+			}
+
+			runStr = `{func.testFunc}`   // format
+			fmt.Printf("provider.Format(runStr, false): %v\n", provider.Format(runStr, false))  // provider.Format(runStr, false): hahaha
 */
-var Version = "0.2.0"
+var Version = "0.2.1"
