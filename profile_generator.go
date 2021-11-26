@@ -65,7 +65,7 @@ func (p *Profile) Generate(generators *Generators) {
 		}
 	}
 
-	p.MobileNumber = mobile.Generate("")
+	p.MobileNumber = mobile.Generate()
 
 	var homeAddress Address
 

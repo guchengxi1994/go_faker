@@ -1,9 +1,7 @@
 package gofaker
 
 import (
-	a "github.com/guchengxi1994/go_faker/providers/address"
-	s "github.com/guchengxi1994/go_faker/providers/school"
-	"github.com/guchengxi1994/go_faker/utils"
+	provider "github.com/guchengxi1994/go_faker/providers"
 )
 
 type School struct {
@@ -23,16 +21,16 @@ func (s *School) Generate() string {
 func getSchool_ZH(t int) string {
 	var suffix string
 	if t == 0 {
-		suffix = utils.GetRandomItemFromStringList(s.Primary_school_suffix_zh)
+		suffix = provider.Format(provider.Format_Zh_simple_primary_school, false)
 	} else if t == 1 {
-		suffix = utils.GetRandomItemFromStringList(s.Middle_school_suffix_zh)
+		suffix = provider.Format(provider.Format_Zh_simple_middle_school, false)
 	} else if t == 2 {
-		suffix = utils.GetRandomItemFromStringList(s.University_suffix_zh)
+		suffix = provider.Format(provider.Format_Zh_simple_university, false)
 	} else {
 		suffix = "职业技术学院"
 	}
 
-	prefix := utils.GetRandomItemFromStringList(a.Zh_districts_simple)
+	prefix := provider.Format(provider.Format_Zh_simple_district, false)
 
 	return prefix + suffix
 }

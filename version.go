@@ -30,5 +30,8 @@ package gofaker
 	v0.1.1 car license generator
 
 	v0.1.2 isbn generator
+
+	v0.2.0 create a pattern to generate random
+		   information, such as python faker
 */
-var Version = "0.1.1"
+var Version = "0.2.0"

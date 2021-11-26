@@ -1,8 +1,7 @@
 package gofaker
 
 import (
-	ni "github.com/guchengxi1994/go_faker/providers/nickname"
-	"github.com/guchengxi1994/go_faker/utils"
+	p "github.com/guchengxi1994/go_faker/providers"
 )
 
 type Nickname struct {
@@ -15,11 +14,11 @@ type Nickname struct {
 func (nickname *Nickname) Generate() {
 	nickname.generated = true
 	if nickname.Gender {
-		nickname.Prefix = utils.GetRandomItemFromStringList(ni.Prefix_nickname_male)
+		nickname.Prefix = p.Format(p.Format_nickname_male_pre, false)
 	} else {
-		nickname.Prefix = utils.GetRandomItemFromStringList(ni.Prefix_nickname_female)
+		nickname.Prefix = p.Format(p.Format_nickname_female_pre, false)
 	}
-	nickname.Suffix = utils.GetRandomItemFromStringList(ni.Common_nicknames)
+	nickname.Suffix = p.Format(p.Format_nickname_common, false)
 }
 
 func (nickname *Nickname) ToString() string {

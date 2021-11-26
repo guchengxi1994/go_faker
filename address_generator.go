@@ -7,7 +7,6 @@ import (
 	"time"
 
 	p "github.com/guchengxi1994/go_faker/providers"
-	a "github.com/guchengxi1994/go_faker/providers/address"
 	utils "github.com/guchengxi1994/go_faker/utils"
 )
 
@@ -58,17 +57,15 @@ func (addr *Address) City(args ...float64) string {
 	switch addr.Locole {
 	case "zh_CN":
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_cities_simple, args...)
-			result = fmt.Sprintf(p.Zh_city_format_simple, utils.GetRandomItemFromMapWithWeight(m))
+			result = p.Format(p.Format_Zh_simple_city, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_city_format_simple, utils.GetRandomItemFromStringList(a.Zh_cities_simple))
+			result = p.Format(p.Format_Zh_simple_city, false)
 		}
 	default:
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_cities_simple, args...)
-			result = fmt.Sprintf(p.Zh_city_format_simple, utils.GetRandomItemFromMapWithWeight(m))
+			result = p.Format(p.Format_Zh_simple_city, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_city_format_simple, utils.GetRandomItemFromStringList(a.Zh_cities_simple))
+			result = p.Format(p.Format_Zh_simple_city, false)
 		}
 	}
 
@@ -83,17 +80,15 @@ func (addr *Address) District(args ...float64) string {
 	switch addr.Locole {
 	case "zh_CN":
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_districts_simple, args...)
-			result = fmt.Sprintf(p.Zh_district_format_simple, utils.GetRandomItemFromMapWithWeight(m))
+			result = p.Format(p.Format_Zh_simple_district, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_district_format_simple, utils.GetRandomItemFromStringList(a.Zh_districts_simple))
+			result = p.Format(p.Format_Zh_simple_district, false)
 		}
 	default:
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_districts_simple, args...)
-			result = fmt.Sprintf(p.Zh_district_format_simple, utils.GetRandomItemFromMapWithWeight(m))
+			result = p.Format(p.Format_Zh_simple_district, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_district_format_simple, utils.GetRandomItemFromStringList(a.Zh_districts_simple))
+			result = p.Format(p.Format_Zh_simple_district, false)
 		}
 	}
 
@@ -108,17 +103,15 @@ func (addr *Address) StreetName(args ...float64) string {
 	switch addr.Locole {
 	case "zh_CN":
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_cities_simple, args...)
-			result = fmt.Sprintf(p.Zh_street_name_format_simple, utils.GetRandomItemFromMapWithWeight(m), utils.GetRandomItemFromStringList(a.Zh_street_suffixes_simple))
+			result = p.Format(p.Format_Zh_simple_street_name, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_street_name_format_simple, utils.GetRandomItemFromStringList(a.Zh_cities_simple), utils.GetRandomItemFromStringList(a.Zh_street_suffixes_simple))
+			result = p.Format(p.Format_Zh_simple_street_name, false)
 		}
 	default:
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_cities_simple, args...)
-			result = fmt.Sprintf(p.Zh_street_name_format_simple, utils.GetRandomItemFromMapWithWeight(m), utils.GetRandomItemFromStringList(a.Zh_street_suffixes_simple))
+			result = p.Format(p.Format_Zh_simple_street_name, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_street_name_format_simple, utils.GetRandomItemFromStringList(a.Zh_cities_simple), utils.GetRandomItemFromStringList(a.Zh_street_suffixes_simple))
+			result = p.Format(p.Format_Zh_simple_street_name, false)
 		}
 	}
 
@@ -130,19 +123,18 @@ func (addr *Address) StreetAddress(length int, args ...float64) string {
 		args = addr.Args
 	}
 	var result string
-	streetName := addr.StreetName(args...)
 	switch addr.Locole {
 	case "zh_CN":
 		if addr.UseWeighting && len(args) > 0 {
-			result = fmt.Sprintf(p.Zh_street_address_format_simple, streetName, addr.BuildingNumber(length))
+			result = p.Format(p.Format_Zh_simple_street_address, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_street_address_format_simple, streetName, addr.BuildingNumber(length))
+			result = p.Format(p.Format_Zh_simple_street_address, false)
 		}
 	default:
 		if addr.UseWeighting && len(args) > 0 {
-			result = fmt.Sprintf(p.Zh_street_address_format_simple, streetName, addr.BuildingNumber(length))
+			result = p.Format(p.Format_Zh_simple_street_address, true, args...)
 		} else {
-			result = fmt.Sprintf(p.Zh_street_address_format_simple, streetName, addr.BuildingNumber(length))
+			result = p.Format(p.Format_Zh_simple_street_address, false)
 		}
 	}
 
@@ -157,17 +149,15 @@ func (addr *Address) Province(args ...float64) string {
 	switch addr.Locole {
 	case "zh_CN":
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_provinces_simple, args...)
-			result = utils.GetRandomItemFromMapWithWeight(m)
+			result = p.Format(p.Format_Zh_simple_province, true, args...)
 		} else {
-			result = utils.GetRandomItemFromStringList(a.Zh_provinces_simple)
+			result = p.Format(p.Format_Zh_simple_province, false)
 		}
 	default:
 		if addr.UseWeighting && len(args) > 0 {
-			m, _ := utils.GenerateWeights(a.Zh_provinces_simple, args...)
-			result = utils.GetRandomItemFromMapWithWeight(m)
+			result = p.Format(p.Format_Zh_simple_province, true, args...)
 		} else {
-			result = utils.GetRandomItemFromStringList(a.Zh_provinces_simple)
+			result = p.Format(p.Format_Zh_simple_province, false)
 		}
 	}
 
@@ -185,9 +175,17 @@ func (addr *Address) Address(args ...float64) string {
 	var result string
 	switch addr.Locole {
 	case "zh_CN":
-		result = fmt.Sprintf(p.Zh_address_format_simple, addr.Province(args...), addr.City(args...), addr.District(args...), addr.StreetAddress(addr.PostcodeLength, args...))
+		if addr.UseWeighting && len(args) > 0 {
+			result = p.Format(p.Format_Zh_simple_address, true, args...)
+		} else {
+			result = p.Format(p.Format_Zh_simple_address, false)
+		}
 	default:
-		result = fmt.Sprintf(p.Zh_address_format_simple, addr.Province(args...), addr.City(args...), addr.District(args...), addr.StreetAddress(addr.PostcodeLength, args...))
+		if addr.UseWeighting && len(args) > 0 {
+			result = p.Format(p.Format_Zh_simple_address, true, args...)
+		} else {
+			result = p.Format(p.Format_Zh_simple_address, false)
+		}
 	}
 	return result
 }

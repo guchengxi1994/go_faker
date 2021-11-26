@@ -1,43 +1,44 @@
 package gofaker
 
 import (
-	pm "github.com/guchengxi1994/go_faker/providers/mobile"
-	"github.com/guchengxi1994/go_faker/utils"
+	"fmt"
+
+	p "github.com/guchengxi1994/go_faker/providers"
 )
 
 type Mobile struct {
-	Locale string
-	City   string
+	Locale   string
+	City     string
+	Supplier string
 }
 
-func (mobile *Mobile) Generate(supplier string) string {
+func (mobile *Mobile) Generate() string {
 	switch mobile.Locale {
 	case "zh_CN":
-		return generateFromSupplier_Zh(supplier)
+		var _supplier_param_name string
+		if mobile.Supplier == "yidong" {
+			_supplier_param_name = "Yidong_prefix"
+		} else if mobile.Supplier == "liantong" {
+			_supplier_param_name = "Liantong_prefix"
+		} else if mobile.Supplier == "dianxin" {
+			_supplier_param_name = "Dianxin_prefix"
+		} else {
+			_supplier_param_name = "Zh_mobile_all_prefix"
+		}
+		runStr := fmt.Sprintf(p.Function_Zh_mobile, _supplier_param_name)
+		return p.Format(runStr, false)
 	default:
-		return generateFromSupplier_Zh(supplier)
+		var _supplier_param_name string
+		if mobile.Supplier == "yidong" {
+			_supplier_param_name = "Yidong_prefix"
+		} else if mobile.Supplier == "liantong" {
+			_supplier_param_name = "Liantong_prefix"
+		} else if mobile.Supplier == "dianxin" {
+			_supplier_param_name = "Dianxin_prefix"
+		} else {
+			_supplier_param_name = "Zh_mobile_all_prefix"
+		}
+		runStr := fmt.Sprintf(p.Function_Zh_mobile, _supplier_param_name)
+		return p.Format(runStr, false)
 	}
-}
-
-func generateFromSupplier_Zh(supplier string) string {
-	switch supplier {
-	case "yidong":
-		return generateMobile(pm.Yidong_prefix, 11)
-	case "liantong":
-		return generateMobile(pm.Liantong_prefix, 11)
-	case "dianxin":
-		return generateMobile(pm.Dianxin_prefix, 11)
-	default:
-		var pres []string
-		pres = append(pres, pm.Dianxin_prefix...)
-		pres = append(pres, pm.Liantong_prefix...)
-		pres = append(pres, pm.Yidong_prefix...)
-		return generateMobile(pres, 11)
-	}
-}
-
-func generateMobile(prefix []string, sufLength int) string {
-	pre := utils.GetRandomItemFromStringList(prefix)
-	suf := utils.GenerateRandomNumberNew(sufLength - len(pre))
-	return pre + suf
 }

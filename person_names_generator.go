@@ -1,7 +1,7 @@
 package gofaker
 
 import (
-	pn "github.com/guchengxi1994/go_faker/providers/person_names"
+	provider "github.com/guchengxi1994/go_faker/providers"
 	utils "github.com/guchengxi1994/go_faker/utils"
 	"github.com/mozillazg/go-pinyin"
 )
@@ -19,35 +19,19 @@ func (p *PersonName) Generate(args ...float64) {
 	p.generated = true
 	switch p.Locale {
 	case "zh_CN":
-		if len(args) > 0 {
-			m, err := utils.GenerateWeights(pn.Last_names_zh, args...)
-			if err != nil {
-				p.Lastname = utils.GetRandomItemFromStringList(pn.Last_names_zh)
-			}
-			p.Lastname = utils.GetRandomItemFromMapWithWeight(m)
-		} else {
-			p.Lastname = utils.GetRandomItemFromStringList(pn.Last_names_zh)
-		}
+		p.Lastname = provider.Format(provider.Format_Zh_simple_lastname, true, args...)
 		if p.Gender {
-			p.Firstname = utils.GetRandomItemFromStringList(pn.First_names_male_zh)
+			p.Firstname = provider.Format(provider.Format_Zh_simple_male_firstname, false)
 		} else {
-			p.Firstname = utils.GetRandomItemFromStringList(pn.First_fenames_male_zh)
+			p.Firstname = provider.Format(provider.Format_Zh_simple_female_firstname, false)
 		}
 
 	default:
-		if len(args) > 0 {
-			m, err := utils.GenerateWeights(pn.Last_names_zh, args...)
-			if err != nil {
-				p.Lastname = utils.GetRandomItemFromStringList(pn.Last_names_zh)
-			}
-			p.Lastname = utils.GetRandomItemFromMapWithWeight(m)
-		} else {
-			p.Lastname = utils.GetRandomItemFromStringList(pn.Last_names_zh)
-		}
+		p.Lastname = provider.Format(provider.Format_Zh_simple_lastname, true, args...)
 		if p.Gender {
-			p.Firstname = utils.GetRandomItemFromStringList(pn.First_names_male_zh)
+			p.Firstname = provider.Format(provider.Format_Zh_simple_male_firstname, false)
 		} else {
-			p.Firstname = utils.GetRandomItemFromStringList(pn.First_fenames_male_zh)
+			p.Firstname = provider.Format(provider.Format_Zh_simple_female_firstname, false)
 		}
 	}
 }

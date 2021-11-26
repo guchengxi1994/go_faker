@@ -212,10 +212,10 @@ func (f *Faker) Mobile() string {
 			Locale: f.Locale,
 		}
 		f.cachedGenerators["mobile"] = _value
-		return _value.Generate("")
+		return _value.Generate()
 	} else {
 		_value := value.(Mobile)
-		return _value.Generate("")
+		return _value.Generate()
 	}
 }
 

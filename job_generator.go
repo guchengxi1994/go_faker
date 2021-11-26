@@ -1,8 +1,7 @@
 package gofaker
 
 import (
-	j "github.com/guchengxi1994/go_faker/providers/jobs"
-	"github.com/guchengxi1994/go_faker/utils"
+	p "github.com/guchengxi1994/go_faker/providers"
 )
 
 type Job struct {
@@ -12,8 +11,8 @@ type Job struct {
 func (job *Job) Generate() string {
 	switch job.Locale {
 	case "zh_CN":
-		return utils.GetRandomItemFromStringList(j.Job_zh)
+		return p.Format(p.Format_Zh_simple_job, false)
 	default:
-		return utils.GetRandomItemFromStringList(j.Job_zh)
+		return p.Format(p.Format_Zh_simple_job, false)
 	}
 }
