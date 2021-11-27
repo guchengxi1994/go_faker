@@ -275,3 +275,56 @@ func (f *Faker) SSN() string {
 		return _value.Generate()
 	}
 }
+
+// generate a random isbn(10 and 13)
+func (f *Faker) ISBN10() string {
+	if !f.inited {
+		f.Init()
+	}
+	value, ok := f.cachedGenerators["isbn"]
+	if !ok {
+		_value := ISBN{}
+		f.cachedGenerators["isbn"] = _value
+		_value.Generate()
+		return _value.ISBN10
+	} else {
+		_value := value.(ISBN)
+		_value.Generate()
+		return _value.ISBN10
+	}
+}
+
+func (f *Faker) ISBN13() string {
+	if !f.inited {
+		f.Init()
+	}
+	value, ok := f.cachedGenerators["isbn"]
+	if !ok {
+		_value := ISBN{}
+		f.cachedGenerators["isbn"] = _value
+		_value.Generate()
+		return _value.ISBN13
+	} else {
+		_value := value.(ISBN)
+		_value.Generate()
+		return _value.ISBN13
+	}
+}
+
+// generate a random car license
+func (f *Faker) CarLicense() string {
+	if !f.inited {
+		f.Init()
+	}
+	value, ok := f.cachedGenerators["car"]
+	if !ok {
+		_value := Carlicense{
+			Locale: f.Locale,
+		}
+		f.cachedGenerators["car"] = _value
+		return _value.Generate()
+	} else {
+		_value := value.(Carlicense)
+		return _value.Generate()
+	}
+}

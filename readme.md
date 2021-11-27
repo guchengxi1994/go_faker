@@ -5,7 +5,7 @@
  * @email: guchengxi1994@qq.com
  * @Date: 2021-11-26 19:57:46
  * @LastEditors: xiaoshuyui
- * @LastEditTime: 2021-11-26 21:04:01
+ * @LastEditTime: 2021-11-27 08:48:12
 -->
 # go-faker
 
@@ -17,7 +17,7 @@
 
 ## How to use
 
-### 0.what is Faker?
+### 0.What is Faker?
 
 ```go
 type Faker struct {
@@ -189,13 +189,23 @@ func main() {
 ### 11.Generate a random isbn (10 and 13)
 ```go
 func main() {
-	i := g.ISBN{}
-	i.Generate()
-	fmt.Printf("i.ToString(): %v\n", i.ToString())
+	f := g.Faker{}
+	fmt.Printf("f.ISBN10(): %v\n", f.ISBN10())
+	fmt.Printf("f.ISBN13(): %v\n", f.ISBN13())
 }
 ```
 
-### 12.Others are under construction.
+### 12.Generate a car license.
+```go
+func main() {
+	f := g.Faker{
+		Locale: "zh_CN",
+	}
+	fmt.Printf("f.CarLicense(): %v\n", f.CarLicense())
+}
+```
+
+### 13.Others are under construction.
 
 ## Custom generators
 
@@ -225,3 +235,15 @@ fmt.Printf("provider.Format(runStr, false): %v\n", provider.Format(runStr, false
 ### I have been learning golang since Sep.2021, it is quite different from python/java/dart. It is not hard but a little not convient when coding such as find out wether an array contains a specific item, or get a substring. And the `path` module in go maybe not as good as python's `os.path` module. Also, no  `try...catch...`. I think I need more execises in golang.
 
 ### And yes, building wheels with a unfamiliar language is amazing. 
+
+## How to contribute.
+
+### 1. If want to add a new locale. It maybe a little complicated.
+
+### 1) Add a go file in `providers/.../`, for example, if want to fake an `english` job, create a file in `providers/jobs/` with several random job names. 
+
+### 2) Add a format in `providers/formats.go` like this `Format_Zh_simple_job              = "{Job_zh}"`
+
+### 3) Run `providers.Format(...,...,...)` to check if it works.
+
+### 2. If find any bugs or any good ideas, welcome to make a PR.

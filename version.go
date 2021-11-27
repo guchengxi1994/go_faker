@@ -5,7 +5,7 @@
  * @email: guchengxi1994@qq.com
  * @Date: 2021-11-26 19:57:46
  * @LastEditors: xiaoshuyui
- * @LastEditTime: 2021-11-26 20:23:24
+ * @LastEditTime: 2021-11-27 08:47:09
  */
 package gofaker
 
@@ -54,5 +54,7 @@ package gofaker
 			fmt.Printf("provider.Format(runStr, false): %v\n", provider.Format(runStr, false))  // provider.Format(runStr, false): hahaha
 
 	v0.2.1+1 fix some errors
+
+	v0.2.1+2 add car lisence and isbn to Faker
 */
-var Version = "0.2.1+1"
+var Version = "0.2.1+2"
