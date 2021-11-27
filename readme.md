@@ -246,6 +246,8 @@ fmt.Printf("provider.Format(runStr, false): %v\n", provider.Format(runStr, false
 
 ### 3) Register in `providers/generate.go` like this `"Job_zh":      &jobs.Job_zh,`
 
-### 4) Run `providers.Format(...,...,...)` to check if it works.
+### 4）Add a case branch in `job_generator.go`.
+
+### 5) Run `providers.Format(...,...,...)` to check if it works.
 
 ### 2. If find any bugs or any good ideas, welcome to make a PR.
