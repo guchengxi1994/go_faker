@@ -2,8 +2,10 @@ package providers
 
 import (
 	"errors"
+	"fmt"
 	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
 
 	address "github.com/guchengxi1994/go_faker/providers/address"
@@ -17,6 +19,7 @@ import (
 	names "github.com/guchengxi1994/go_faker/providers/person_names"
 	school "github.com/guchengxi1994/go_faker/providers/school"
 	ssn "github.com/guchengxi1994/go_faker/providers/ssn"
+	ua "github.com/guchengxi1994/go_faker/providers/user_agent"
 	"github.com/guchengxi1994/go_faker/utils"
 	plt "github.com/guchengxi1994/pyLikeType"
 )
@@ -49,10 +52,22 @@ var global_variants = map[string]*[]string{
 	"University_suffix_zh":      &school.University_suffix_zh,
 	"Ssn_pre_zh":                &ssn.Ssn_pre_zh,
 	"Zh_mobile_all_prefix":      &mobile.Zh_mobile_all_prefix,
+	"Windows_platform_tokens":   &ua.Windows_platform_tokens,
+	"User_agents_browser":       &ua.User_agents_browser,
+	"Linux_processors":          &ua.Linux_processors,
+	"Mac_processors":            &ua.Mac_processors,
+	"Android_versions":          &ua.Android_versions,
+	"Apple_devices":             &ua.Apple_devices,
+	"Ios_versions":              &ua.Ios_versions,
 }
 
 var global_function = map[string]interface{}{
 	"GenerateMobileFromList": utils.GenerateMobileFromList,
+	"Saf":                    utils.Saf,
+	"Chrome_version":         utils.Chrome_version,
+	"Chrome_build_version":   utils.Chrome_build_version,
+	"Randn":                  utils.Randn,
+	"Randn_with_min":         utils.Randn_with_min,
 }
 
 func Format(pattern string, useWeight bool, args ...float64) string {
@@ -127,21 +142,32 @@ func applyFunction(functionname string, argname ...string) string {
 		for _, v := range argname {
 			_param, ok := global_variants[v]
 			if !ok {
-				return ""
-			}
-			if reflect.ValueOf(_param).Kind() == reflect.Ptr {
-				_tmp := *_param
-				params = append(params, _tmp)
-			} else {
-				params = append(params, _param)
-			}
+				_v := plt.ExtendString{
+					Value: v,
+				}
+				if _v.StartsWith("i_") {
+					__v := strings.Split(_v.Value, "_")[1]
+					_i, _ := strconv.Atoi(__v)
+					params = append(params, _i)
 
+				} else {
+					params = append(params, v)
+				}
+
+			} else {
+				if reflect.ValueOf(_param).Kind() == reflect.Ptr {
+					_tmp := *_param
+					params = append(params, _tmp)
+				} else {
+					params = append(params, _param)
+				}
+			}
 		}
 		values, err := Call(function, params...)
 		if err != nil {
 			return ""
 		} else {
-			return values[0].String()
+			return fmt.Sprint(values[0])
 		}
 	}
 

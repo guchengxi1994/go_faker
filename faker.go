@@ -328,3 +328,19 @@ func (f *Faker) CarLicense() string {
 		return _value.Generate()
 	}
 }
+
+// genrate a user agent
+func (f *Faker) UserAgent() string {
+	if !f.inited {
+		f.Init()
+	}
+	value, ok := f.cachedGenerators["user-agent"]
+	if !ok {
+		_value := UserAgent{}
+		f.cachedGenerators["user-agent"] = _value
+		return _value.Generate(true)
+	} else {
+		_value := value.(UserAgent)
+		return _value.Generate(true)
+	}
+}

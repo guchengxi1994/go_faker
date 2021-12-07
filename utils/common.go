@@ -45,7 +45,7 @@ func Minimum(ignoreZero bool, list []float64) float64 {
 	sort.Sort(_list)
 
 	for _, i := range _list {
-		if i != 0 {
+		if ignoreZero && i != 0 {
 			return i
 		}
 	}

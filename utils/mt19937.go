@@ -74,3 +74,7 @@ func Randn(max int) int {
 	}
 	return Rand() % max
 }
+
+func Randn_with_min(min, max int) int {
+	return Randn(max-min) + min
+}

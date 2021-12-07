@@ -22,6 +22,8 @@ var (
 
 	eg. func.Test.[name1,name2,name3]  nameN should be registered in global_variants
 
+	"i_???" means `???` is a int
+
 	will be completed :)
 */
 var (
@@ -42,4 +44,10 @@ var (
 	Format_Zh_simple_primary_school   = "{Zh_districts_simple}{Primary_school_suffix_zh}"
 	Format_Zh_simple_middle_school    = "{Zh_districts_simple}{Middle_school_suffix_zh}"
 	Format_Zh_simple_university       = "{Zh_districts_simple}{University_suffix_zh}"
+	Format_chrome_user_agent_windows  = `Mozilla/5.0  ({Windows_platform_tokens}) AppleWebKit/{func.Saf} (KHTML, like Gecko) Chrome/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
+	Format_chrome_user_agent_linux    = `Mozilla/5.0  (X11; Linux {Linux_processors}) AppleWebKit/{func.Saf} (KHTML, like Gecko) Chrome/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
+	Format_chrome_user_agent_mac      = `Mozilla/5.0  (Macintosh; {Mac_processors}) Mac OS X 10_{func.Randn_with_min.[i_5,i_12]}_{func.Randn.[i_9]} AppleWebKit/{func.Saf} (KHTML, like Gecko) Chrome/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
+	Format_chrome_user_agent_android  = `Mozilla/5.0  (Linux; Android {Android_versions}) AppleWebKit/{func.Saf} (KHTML, like Gecko) Chrome/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
+	Format_chrome_user_agent_ios      = `Mozilla/5.0  ({Ios_versions}) AppleWebKit/{func.Saf} (KHTML, like Gecko)  CriOS/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
+	Format_ie_user_agent              = `Mozilla/5.0 (compatible; MSIE {func.Randn_with_min.[i_5,i_9]}.0; {Windows_platform_tokens} Trident/{func.Randn_with_min.[i_3,i_5]}.{func.Randn.[i_2]})`
 )

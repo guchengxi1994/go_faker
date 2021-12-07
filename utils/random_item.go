@@ -45,3 +45,8 @@ func turn_float_to_int(items map[string]float64, factor float64) map[string]uint
 	}
 	return result
 }
+
+func GetRandomRuneFromString(s string) string {
+	index := Randn(len([]rune(s)))
+	return string([]rune(s)[index])
+}
