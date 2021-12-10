@@ -38,7 +38,34 @@ func (u *UserAgent) Generate(allRandom bool) string {
 		}
 	case "ie":
 		return fp.Format(fp.Format_ie_user_agent, false)
+	case "firefox":
+		switch u.PlatForm {
+		case "windows":
+			return fp.Format(fp.Format_firefox_user_agent_win, false)
+		case "linux":
+			return fp.Format(fp.Format_firefox_user_agent_lin, false)
+		case "android":
+			return fp.Format(fp.Format_firefox_user_agent_and, false)
+		case "mac":
+			return fp.Format(fp.Format_firefox_user_agent_mac, false)
+		case "ios":
+			return fp.Format(fp.Format_firefox_user_agent_ios, false)
+		default:
+			return fp.Format(fp.Format_firefox_user_agent_win, false)
+		}
+	case "safari":
+		switch u.PlatForm {
+		case "windows":
+			return fp.Format(fp.Format_safari_user_agent_win, false)
+		case "mac":
+			return fp.Format(fp.Format_safari_user_agent_mac, false)
+		case "ipod":
+			return fp.Format(fp.Format_safari_user_agent_ipod, false)
+		default:
+			return fp.Format(fp.Format_safari_user_agent_win, false)
+		}
+
 	default:
-		return ""
+		return fp.Format(fp.Format_ie_user_agent, false)
 	}
 }

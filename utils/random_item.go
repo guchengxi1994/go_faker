@@ -2,6 +2,9 @@ package utils
 
 import (
 	"fmt"
+	"strings"
+
+	locales "github.com/guchengxi1994/go_faker/providers/locales"
 )
 
 func GetRandomItemFromMapWithWeight(items map[string]float64) string {
@@ -49,4 +52,8 @@ func turn_float_to_int(items map[string]float64, factor float64) map[string]uint
 func GetRandomRuneFromString(s string) string {
 	index := Randn(len([]rune(s)))
 	return string([]rune(s)[index])
+}
+
+func RandomLocale() string {
+	return strings.ReplaceAll(GetRandomItemFromStringList(locales.Locales), "_", "-")
 }

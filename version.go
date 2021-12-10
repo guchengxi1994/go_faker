@@ -58,5 +58,7 @@ package gofaker
 	v0.2.1+2 add car lisence and isbn to Faker
 
 	v0.3.0 chrome/ie user-agent generator, fix some bugs
+
+	v0.4.0-pre safari/firefox user-agent generator
 */
-var Version = "0.3.0"
+var Version = "0.4.0-pre"

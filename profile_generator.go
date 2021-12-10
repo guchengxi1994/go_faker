@@ -179,16 +179,3 @@ func (p *Profile) FormatExperice(t int) string {
 	}
 
 }
-
-// Deprecated
-func determineWorkAge(currentAge int) int {
-	var ages = []int{
-		18, 19, 20, 21, 22, 23,
-	}
-
-	if currentAge > ages[len(ages)-1] {
-		return ages[utils.Randn(len(ages))]
-	} else {
-		return ages[0]
-	}
-}

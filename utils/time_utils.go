@@ -93,3 +93,14 @@ func SplitEducationYears(years []int, currentAge int, studyAge int) []TimeStruct
 	return ts
 
 }
+
+func DateTimeBetween() string {
+	now := time.Now()
+	month, _ := strconv.Atoi(now.Format("01"))
+	monthMax := month + (now.Year()-1970)*12
+	months := Randn(monthMax)
+	_sub_year := -months / 12
+	_sub_month := -months % 12
+	_dateTime := now.AddDate(_sub_year, _sub_month, 0)
+	return _dateTime.Format("2006-01-02")
+}

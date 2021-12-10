@@ -50,4 +50,12 @@ var (
 	Format_chrome_user_agent_android  = `Mozilla/5.0  (Linux; Android {Android_versions}) AppleWebKit/{func.Saf} (KHTML, like Gecko) Chrome/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
 	Format_chrome_user_agent_ios      = `Mozilla/5.0  ({Ios_versions}) AppleWebKit/{func.Saf} (KHTML, like Gecko)  CriOS/{func.Chrome_version.[13,63]}.0.{func.Chrome_build_version.[800,899]}.0 Safari/{func.Saf}`
 	Format_ie_user_agent              = `Mozilla/5.0 (compatible; MSIE {func.Randn_with_min.[i_5,i_9]}.0; {Windows_platform_tokens} Trident/{func.Randn_with_min.[i_3,i_5]}.{func.Randn.[i_2]})`
+	Format_firefox_user_agent_win     = `Mozilla/5.0 ({Windows_platform_tokens}; {func.RandomLocale}; rv:1.9.{func.Randn.[i_2]}.20) Gecko/{func.DateTimeBetween} Firefox/3.8`
+	Format_firefox_user_agent_lin     = `Mozilla/5.0 (X11; Linux {Linux_processors}; rv:1.9.{func.Randn_with_min.[i_5,i_7]}.20) Gecko/{func.DateTimeBetween} Firefox/3.8`
+	Format_firefox_user_agent_mac     = `Mozilla/5.0 (Macintosh; {Mac_processors} Mac OS X 10_{func.Randn_with_min.[i_5,i_12]}_{func.Randn.[i_9]}) ; rv:1.9.{func.Randn_with_min.[i_2,i_6]}.20) {func.DateTimeBetween}`
+	Format_firefox_user_agent_and     = `Mozilla/5.0 (Linux; Android {Android_versions}; Mobile; rv:{func.Randn_with_min.[i_5,i_68]}.0) Gecko/{func.Randn_with_min.[i_5,i_68]}.0 Firefox/{func.Randn_with_min.[i_5,i_68]}.0`
+	Format_firefox_user_agent_ios     = `Mozilla/5.0 ({Ios_versions}) AppleWebKit/{func.Saf} (KHTML, like Gecko) FxiOS/{func.Randn_with_min.[i_9,i_18]}.{func.Numerify.[##?###]}.0 Mobile/{func.Numerify.[#?####]} Safari/{func.Randn_with_min.[i_9,i_18]}`
+	Format_safari_user_agent_win      = `Mozilla/5.0 (Windows; U; {Windows_platform_tokens}) AppleWebKit/{func.Saf} (KHTML, like Gecko)" " Version/{func.Randn_with_min.[i_4,i_5]}.{func.Randn.[i_2]} Safari/{func.Saf}`
+	Format_safari_user_agent_mac      = `Mozilla/5.0 (Macintosh; {Mac_processors} Mac OS X 10_{func.Randn_with_min.[i_5,i_12]}_{func.Randn.[i_9]}) rv:{func.Randn_with_min.[i_2,i_6]}.0; {func.RandomLocale}) AppleWebKit/{func.Saf} (KHTML, like Gecko)" " Version/{func.Randn_with_min.[i_4,i_6]}.{func.Randn.[i_2]} Safari/{func.Saf}`
+	Format_safari_user_agent_ipod     = `Mozilla/5.0 (iPod; U; CPU iPhone OS {func.Randn_with_min.[i_3,i_5]}_{func.Randn.[i_3]} like Mac OS X; {func.RandomLocale}) AppleWebKit/{func.Saf} (KHTML, like Gecko) Version/{func.Randn_with_min.[i_3,i_5]}.0.5 Mobile/8B{func.Randn_with_min.[i_111,i_119]} Safari/6{func.Saf}`
 )
