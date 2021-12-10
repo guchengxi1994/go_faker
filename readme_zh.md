@@ -442,11 +442,11 @@ typora-root-url: introduction
 
 1. LFSR
 
-   ![img](/企业微信截图_16391065873533.png)
+   ![img](/introduction/16391065873533.png)
 
 2. 本原多项式
 
-   ![image-20211210112657799](/image-20211210112657799.png)
+   ![image-20211210112657799](/introduction/image-20211210112657799.png)
 
 3. 级
 
@@ -454,7 +454,7 @@ typora-root-url: introduction
 
 4. 反馈函数
 
-   ![img](/企业微信截图_16391080464710.png)
+   ![img](/introduction/16391080464710.png)
 
    简单地理解成告诉你你要对这个寄存器干什么的一个函数就好了
 
@@ -482,21 +482,21 @@ typora-root-url: introduction
 
 1. 初始数组 { 1 ， 0 ， 0 ， 0 } 
 
-   ![image-20211210115649048](/C:/Users/xiaoshuyui/AppData/Roaming/Typora/typora-user-images/image-20211210115649048.png)
+   ![image-20211210115649048](/introduction/image-20211210115649048.png)
 
 2. 将它的第四位和第二位抓出来做异或运算
 
-   ![image-20211210115750842](/image-20211210115750842.png)
+   ![image-20211210115750842](/introduction/image-20211210115750842.png)
 
 3. 把刚刚的运算结果和最后一位再做一次运算
 
-   ![image-20211210115826187](/image-20211210115826187.png)
+   ![image-20211210115826187](/introduction/image-20211210115826187.png)
 
 4. 把最后的运算结果放到第一位，序列后移。最后一位被无情的抛弃
 
    这就是一次运算，然后这个算法就是不断循环这几步，从而不断伪随机改变这个序列。
 
-   ![image-20211210115945659](/image-20211210115945659.png)
+   ![image-20211210115945659](/introduction/image-20211210115826187.png)
 
    上图是一个网上找的一个4级寄存器的模拟过程
 
@@ -508,7 +508,7 @@ typora-root-url: introduction
 
    运算结果如下：
 
-![image-20211210120110987](/image-20211210120110987.png)
+![image-20211210120110987](/introduction/image-20211210120110987.png)
 
 能够看出周期为**15**。在这一个周期里面涵盖了开区间![img](http://img.blog.csdn.net/20140611144947593)内的全部整数，而且都是没有固定顺序出现的，有非常好的随机性。
 
