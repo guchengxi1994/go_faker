@@ -60,5 +60,8 @@ package gofaker
 	v0.3.0 chrome/ie user-agent generator, fix some bugs
 
 	v0.4.0-pre safari/firefox user-agent generator
+
+	v0.4.0 replace `gender` with `cachedParams` in Faker struct,
+	add function `AddParams`
 */
 var Version = "0.4.0-pre"

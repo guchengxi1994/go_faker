@@ -16,7 +16,7 @@ func (u *UserAgent) Generate(allRandom bool) string {
 			"chrome", "firefox", "safari", "opera", "ie",
 		})
 		u.PlatForm = utils.GetRandomItemFromStringList([]string{
-			"linux", "windows", "mac", "android", "ios",
+			"linux", "windows", "mac", "android", "ios", "ipod",
 		})
 	}
 

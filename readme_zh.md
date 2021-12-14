@@ -1,7 +1,3 @@
----
-typora-root-url: introduction
----
-
 # go_faker
 
 ## 一个用golang写的，像python [faker](https://github.com/joke2k/faker) 的库。
