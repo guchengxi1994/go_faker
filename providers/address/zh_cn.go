@@ -425,6 +425,3 @@ var Zh_city_suffixes_simple = []string{
 var Zh_street_suffixes_simple = []string{
 	"街", "路",
 }
-
-type AddressProviderZh struct {
-}

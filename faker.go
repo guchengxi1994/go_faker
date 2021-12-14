@@ -33,7 +33,7 @@ type Faker struct {
 	Args             []float64 // weight
 	cachedGenerators map[string]interface{}
 	inited           bool
-	Gender           bool
+	cachedParams     map[string]interface{}
 }
 
 type Generators struct {
@@ -46,6 +46,21 @@ type Generators struct {
 func (f *Faker) Init() {
 	f.inited = true
 	f.cachedGenerators = make(map[string]interface{})
+	f.cachedParams = make(map[string]interface{})
+}
+
+func (f *Faker) AddParams(key string, value interface{}, overwrite bool) {
+	if !f.inited {
+		f.Init()
+	}
+	_, ok := f.cachedParams[key]
+	if !ok {
+		f.cachedParams[key] = value
+	} else {
+		if overwrite {
+			f.cachedParams[key] = value
+		}
+	}
 }
 
 // generate a random name with gender(bool)
@@ -55,9 +70,17 @@ func (f *Faker) PersonName() string {
 	}
 	value, ok := f.cachedGenerators["personname"]
 	if !ok {
+		var _b bool
+		g, ok := f.cachedParams["gender"]
+		if ok {
+			_b = utils.InterfaceToBoolean(g)
+		} else {
+			_b = false
+		}
+
 		_value := PersonName{
 			Locale: f.Locale,
-			Gender: f.Gender,
+			Gender: _b,
 		}
 		f.cachedGenerators["personname"] = _value
 		_value.Generate(f.Args...)
@@ -76,6 +99,13 @@ func (f *Faker) PersonName() string {
 func (f *Faker) Profile(useCache bool) string {
 	if !f.inited {
 		f.Init()
+	}
+	var _b bool
+	g, ok := f.cachedParams["gender"]
+	if ok {
+		_b = utils.InterfaceToBoolean(g)
+	} else {
+		_b = false
 	}
 	if useCache {
 		gs := Generators{}
@@ -111,9 +141,10 @@ func (f *Faker) Profile(useCache bool) string {
 			_value.Generate(&gs)
 			return value.(Profile).ToString()
 		} else {
+
 			_value := Profile{
 				Locale: f.Locale,
-				Gender: f.Gender,
+				Gender: _b,
 			}
 			f.cachedGenerators["profile"] = _value
 			_value.Generate(&gs)
@@ -122,7 +153,7 @@ func (f *Faker) Profile(useCache bool) string {
 	} else {
 		_value := Profile{
 			Locale: f.Locale,
-			Gender: f.Gender,
+			Gender: _b,
 		}
 		_value.Generate(nil)
 		return _value.ToString()
@@ -224,10 +255,17 @@ func (f *Faker) Nickname() string {
 	if !f.inited {
 		f.Init()
 	}
+	var _b bool
+	g, ok := f.cachedParams["gender"]
+	if ok {
+		_b = utils.InterfaceToBoolean(g)
+	} else {
+		_b = false
+	}
 	value, ok := f.cachedGenerators["nickname"]
 	if !ok {
 		_value := Nickname{
-			Gender: f.Gender,
+			Gender: _b,
 		}
 		f.cachedGenerators["nickname"] = _value
 		_value.Generate()
@@ -262,11 +300,18 @@ func (f *Faker) SSN() string {
 	if !f.inited {
 		f.Init()
 	}
+	var _b bool
+	g, ok := f.cachedParams["gender"]
+	if ok {
+		_b = utils.InterfaceToBoolean(g)
+	} else {
+		_b = false
+	}
 	value, ok := f.cachedGenerators["ssn"]
 	if !ok {
 		_value := SSN{
 			Locale: f.Locale,
-			Gender: f.Gender,
+			Gender: _b,
 		}
 		f.cachedGenerators["ssn"] = _value
 		return _value.Generate()

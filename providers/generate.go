@@ -68,6 +68,9 @@ var global_function = map[string]interface{}{
 	"Chrome_build_version":   utils.Chrome_build_version,
 	"Randn":                  utils.Randn,
 	"Randn_with_min":         utils.Randn_with_min,
+	"RandomLocale":           utils.RandomLocale,
+	"DateTimeBetween":        utils.DateTimeBetween,
+	"Numerify":               utils.Numerify,
 }
 
 func Format(pattern string, useWeight bool, args ...float64) string {
